@@ -1,6 +1,7 @@
 package org.example;
 import org.example.algorithms.MergeSort;
 import org.example.algorithms.QuickSort;
+import org.example.algorithms.DeterministicSelect;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,6 +15,7 @@ public class Main {
             csv.write("Algorithm,ArraySize,Time(ms),Comparisons,Allocations,MaxDepth\n");
 
             testSorting(csv);
+            testSelection(csv);
         }
     }
 
@@ -37,6 +39,26 @@ public class Main {
             m2.stopTimer();
             csv.write(String.format("MergeSort,%d,%d,%d,%d,%d\n",
                     n, m2.getTime(), m2.getComparisons(), m2.getAllocations(), m2.getMaxDepth()));
+        }
+    }
+
+    private static void testSelection(FileWriter csv) throws IOException {
+        DeterministicSelect sel = new DeterministicSelect();
+
+        for (int trial = 0; trial < 100; trial++) {
+            int n = 50;
+            int[] arr = rnd.ints(n, 0, 1000).toArray();
+            Arrays.sort(Arrays.copyOf(arr, arr.length));
+
+            int k = rnd.nextInt(n) + 1;
+            Metrics m = new Metrics();
+
+            m.startTimer();
+            sel.select(Arrays.copyOf(arr, arr.length), k, m);
+            m.stopTimer();
+
+            csv.write(String.format("Selection,%d,%d,%d,%d,%d\n",
+                    n, m.getTime(), m.getComparisons(), m.getAllocations(), m.getMaxDepth()));
         }
     }
 
