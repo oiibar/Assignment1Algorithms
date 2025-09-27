@@ -13,11 +13,11 @@ public final class QuickSort {
 
     private static void sort(int[] arr, int l, int r, Metrics metrics) {
         while (l < r) {
-            metrics.start();
+            metrics.enterRecursion();
             try {
                 int pivotIndex = l + rnd.nextInt(r - l + 1);
                 int pivot = arr[pivotIndex];
-                swap(arr, pivotIndex, r, metrics);
+                swap(arr, pivotIndex, r);
 
                 int p = partition(arr, l, r, pivot, metrics);
 
@@ -29,7 +29,7 @@ public final class QuickSort {
                     r = p - 1;
                 }
             } finally {
-                metrics.end();
+                metrics.leaveRecursion();
             }
         }
     }
@@ -39,15 +39,15 @@ public final class QuickSort {
         for (int j = l; j < r; j++) {
             metrics.incComparisons(1);
             if (arr[j] < pivot) {
-                swap(arr, i, j, metrics);
+                swap(arr, i, j);
                 i++;
             }
         }
-        swap(arr, i, r, metrics);
+        swap(arr, i, r);
         return i;
     }
 
-    private static void swap(int[] arr, int i, int j, Metrics metrics) {
+    private static void swap(int[] arr, int i, int j) {
         int tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;

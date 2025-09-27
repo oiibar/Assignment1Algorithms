@@ -8,13 +8,13 @@ public final class MergeSort {
 
     public static void sort(int[] arr, Metrics metrics) {
         int[] buf = new int[arr.length];
-        metrics.incAlloc(arr.length);
+        metrics.incAllocations(arr.length);
         sort(arr, buf, 0, arr.length - 1, metrics, 16);
     }
 
     private static void sort(int[] arr, int[] buf, int l, int r, Metrics metrics, int cutoff) {
         if (l >= r) return;
-        metrics.start();
+        metrics.enterRecursion();
         try {
             if (r - l + 1 <= cutoff) {
                 insertionSort(arr, l, r, metrics);
@@ -29,7 +29,7 @@ public final class MergeSort {
 
             merge(arr, buf, l, mid, r, metrics);
         } finally {
-            metrics.end();
+            metrics.leaveRecursion();
         }
     }
 
@@ -44,14 +44,15 @@ public final class MergeSort {
                 j--;
             }
             arr[j + 1] = key;
-            metrics.incAlloc(1);
+            metrics.incAllocations(1);
         }
     }
+
 
     private static void merge(int[] arr, int[] buf, int l, int mid, int r, Metrics metrics) {
         for (int t = l; t <= r; t++) {
             buf[t] = arr[t];
-            metrics.incAlloc(1);
+            metrics.incAllocations(1);
         }
 
         int i = l, j = mid + 1, k = l;

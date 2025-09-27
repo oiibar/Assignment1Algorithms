@@ -1,5 +1,4 @@
 package org.example.algorithms;
-
 import org.example.Metrics;
 
 public class DeterministicSelect {
@@ -12,34 +11,45 @@ public class DeterministicSelect {
     }
 
     private int select(int[] arr, int k, int start, int end, Metrics metrics) {
-        metrics.start();
-        try {
-            if (start == end) return arr[start];
+        while (true) {
+            metrics.enterRecursion();
+            try {
+                if (start == end) return arr[start];
 
-            int pivot = findPivot(arr, start, end, metrics);
+                int pivot = findPivot(arr, start, end, metrics);
 
-            int pivotIndex = start;
-            for (int i = start; i <= end; i++) {
-                metrics.incComparisons(1);
-                if (arr[i] == pivot) {
-                    swap(arr, i, end);
-                    pivotIndex = end;
-                    break;
+                int pivotIndex = start;
+                for (int i = start; i <= end; i++) {
+                    metrics.incComparisons(1);
+                    if (arr[i] == pivot) {
+                        swap(arr, i, end);
+                        pivotIndex = end;
+                        break;
+                    }
                 }
-            }
 
-            pivotIndex = partition(arr, start, end, metrics);
+                pivotIndex = partition(arr, start, end, metrics);
 
-            int order = pivotIndex - start + 1;
-            if (k == order) {
-                return arr[pivotIndex];
-            } else if (k < order) {
-                return select(arr, k, start, pivotIndex - 1, metrics);
-            } else {
-                return select(arr, k - order, pivotIndex + 1, end, metrics);
+                int order = pivotIndex - start + 1;
+                if (k == order) {
+                    return arr[pivotIndex];
+                } else if (k < order) {
+                    if (pivotIndex - 1 - start < end - pivotIndex) {
+                        end = pivotIndex - 1;
+                    } else {
+                        end = pivotIndex - 1;
+                    }
+                } else {
+                    k -= order;
+                    if (end - (pivotIndex + 1) < pivotIndex - start) {
+                        start = pivotIndex + 1;
+                    } else {
+                        start = pivotIndex + 1;
+                    }
+                }
+            } finally {
+                metrics.leaveRecursion();
             }
-        } finally {
-            metrics.end();
         }
     }
 
@@ -52,7 +62,7 @@ public class DeterministicSelect {
 
         int numGroups = (int) Math.ceil((double) length / 5);
         int[] medians = new int[numGroups];
-        metrics.incAlloc(numGroups);
+        metrics.incAllocations(numGroups);
 
         for (int i = 0; i < numGroups; i++) {
             int gStart = start + i * 5;
