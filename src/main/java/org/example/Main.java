@@ -1,4 +1,5 @@
 package org.example;
+import org.example.algorithms.ClosestPairOfPoints;
 import org.example.algorithms.MergeSort;
 import org.example.algorithms.QuickSort;
 import org.example.algorithms.DeterministicSelect;
@@ -16,6 +17,7 @@ public class Main {
 
             testSorting(csv);
             testSelection(csv);
+            testClosestPoints(csv);
         }
     }
 
@@ -62,9 +64,34 @@ public class Main {
         }
     }
 
+    private static void testClosestPoints(FileWriter csv) throws IOException {
+        int[] sizes = {100, 500, 2000};
+
+        for (int n : sizes) {
+            double[][] points = randomPoints(n);
+            Metrics m = new Metrics();
+
+            m.startTimer();
+            ClosestPairOfPoints.minDistance(Arrays.copyOf(points, points.length), m);
+            m.stopTimer();
+
+            csv.write(String.format("ClosestPoints,%d,%d,%d,%d,%d\n",
+                    n, m.getTime(), m.getComparisons(), m.getAllocations(), m.getMaxDepth()));
+        }
+    }
+
     private static int[] randomArray(int n) {
         int[] arr = new int[n];
         for (int i = 0; i < n; i++) arr[i] = rnd.nextInt(100000);
         return arr;
+    }
+
+    private static double[][] randomPoints(int n) {
+        double[][] pts = new double[n][2];
+        for (int i = 0; i < n; i++) {
+            pts[i][0] = rnd.nextDouble() * 1000;
+            pts[i][1] = rnd.nextDouble() * 1000;
+        }
+        return pts;
     }
 }
