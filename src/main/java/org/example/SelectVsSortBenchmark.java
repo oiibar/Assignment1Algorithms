@@ -1,5 +1,4 @@
 package org.example;
-
 import org.example.algorithms.DeterministicSelect;
 import org.openjdk.jmh.annotations.*;
 import java.util.Arrays;

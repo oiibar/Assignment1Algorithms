@@ -15,10 +15,9 @@ public class DeterministicSelect {
             metrics.enterRecursion();
             try {
                 if (start == end) return arr[start];
-
                 int pivot = findPivot(arr, start, end, metrics);
-
                 int pivotIndex = start;
+
                 for (int i = start; i <= end; i++) {
                     metrics.incComparisons(1);
                     if (arr[i] == pivot) {
@@ -34,18 +33,10 @@ public class DeterministicSelect {
                 if (k == order) {
                     return arr[pivotIndex];
                 } else if (k < order) {
-                    if (pivotIndex - 1 - start < end - pivotIndex) {
-                        end = pivotIndex - 1;
-                    } else {
-                        end = pivotIndex - 1;
-                    }
+                    end = pivotIndex - 1;
                 } else {
                     k -= order;
-                    if (end - (pivotIndex + 1) < pivotIndex - start) {
-                        start = pivotIndex + 1;
-                    } else {
-                        start = pivotIndex + 1;
-                    }
+                    start = pivotIndex + 1;
                 }
             } finally {
                 metrics.leaveRecursion();

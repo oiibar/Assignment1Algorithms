@@ -2,14 +2,12 @@ import java.util.Random;
 import org.example.Metrics;
 import org.example.algorithms.QuickSort;
 import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class QuickSortTest {
-
     private final Random rnd = new Random(12345);
 
     @Test

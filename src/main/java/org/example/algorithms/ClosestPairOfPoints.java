@@ -4,11 +4,13 @@ import java.util.*;
 
 public class ClosestPairOfPoints {
 
-    private static double distance(double[] p1, double[] p2, Metrics metrics) {
-        metrics.incComparisons(1);
-        double dx = p1[0] - p2[0];
-        double dy = p1[1] - p2[1];
-        return Math.sqrt(dx * dx + dy * dy);
+    public static double minDistance(double[][] points, Metrics metrics) {
+        double[][] pointsByX = points.clone();
+        Arrays.sort(pointsByX, Comparator.comparingDouble(p -> p[0]));
+        double[][] pointsByY = points.clone();
+        Arrays.sort(pointsByY, Comparator.comparingDouble(p -> p[1]));
+
+        return minDistUtil(pointsByX, pointsByY, 0, points.length, metrics);
     }
 
     private static double minDistUtil(double[][] pointsByX, double[][] pointsByY, int left, int right, Metrics metrics) {
@@ -58,13 +60,10 @@ public class ClosestPairOfPoints {
         }
     }
 
-    public static double minDistance(double[][] points, Metrics metrics) {
-        double[][] pointsByX = points.clone();
-        Arrays.sort(pointsByX, Comparator.comparingDouble(p -> p[0]));
-
-        double[][] pointsByY = points.clone();
-        Arrays.sort(pointsByY, Comparator.comparingDouble(p -> p[1]));
-
-        return minDistUtil(pointsByX, pointsByY, 0, points.length, metrics);
+    private static double distance(double[] p1, double[] p2, Metrics metrics) {
+        metrics.incComparisons(1);
+        double dx = p1[0] - p2[0];
+        double dy = p1[1] - p2[1];
+        return Math.sqrt(dx * dx + dy * dy);
     }
 }

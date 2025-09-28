@@ -11,25 +11,21 @@ public final class Metrics {
     public void startTimer() {
         startTime = System.nanoTime();
     }
-
     public void stopTimer() {
         totalTime += System.nanoTime() - startTime;
     }
-
     public void enterRecursion() {
         currDepth++;
         if (currDepth > maxDepth) {
             maxDepth = currDepth;
         }
     }
-
     public void leaveRecursion() {
         currDepth--;
     }
 
     public void incComparisons(long n) { comparisons += n; }
     public void incAllocations(long n) { allocations += n; }
-
     public long getComparisons() { return comparisons; }
     public long getAllocations() { return allocations; }
     public int getMaxDepth() { return maxDepth; }

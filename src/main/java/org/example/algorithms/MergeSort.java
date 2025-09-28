@@ -1,9 +1,7 @@
 package org.example.algorithms;
-
 import org.example.Metrics;
 
 public final class MergeSort {
-
     private MergeSort() {}
 
     public static void sort(int[] arr, Metrics metrics) {
@@ -33,20 +31,6 @@ public final class MergeSort {
         }
     }
 
-    private static void insertionSort(int[] arr, int l, int r, Metrics metrics) {
-        for (int i = l + 1; i <= r; i++) {
-            int key = arr[i];
-            int j = i - 1;
-            while (j >= l) {
-                metrics.incComparisons(1);
-                if (arr[j] <= key) break;
-                arr[j + 1] = arr[j];
-                j--;
-            }
-            arr[j + 1] = key;
-            metrics.incAllocations(1);
-        }
-    }
 
 
     private static void merge(int[] arr, int[] buf, int l, int mid, int r, Metrics metrics) {
@@ -69,6 +53,21 @@ public final class MergeSort {
         }
         while (j <= r) {
             arr[k++] = buf[j++];
+        }
+    }
+
+    private static void insertionSort(int[] arr, int l, int r, Metrics metrics) {
+        for (int i = l + 1; i <= r; i++) {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= l) {
+                metrics.incComparisons(1);
+                if (arr[j] <= key) break;
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+            metrics.incAllocations(1);
         }
     }
 }

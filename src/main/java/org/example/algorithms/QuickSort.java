@@ -4,7 +4,6 @@ import java.util.Random;
 
 public final class QuickSort {
     private static final Random rnd = new Random();
-
     private QuickSort() {}
 
     public static void sort(int[] arr, Metrics metrics) {

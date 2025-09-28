@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Random;
 
-
 public class ClosestPairTest {
     private final Random rnd = new Random(42);
 

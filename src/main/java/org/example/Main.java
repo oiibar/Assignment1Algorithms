@@ -133,7 +133,9 @@ public class Main {
 
     private static int[] randomArray(int n) {
         int[] arr = new int[n];
-        for (int i = 0; i < n; i++) arr[i] = rnd.nextInt(100000);
+        for (int i = 0; i < n; i++) {
+            arr[i] = rnd.nextInt(100000);
+        }
         return arr;
     }
 

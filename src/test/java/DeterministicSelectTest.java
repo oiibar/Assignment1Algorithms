@@ -2,10 +2,8 @@ import org.example.Metrics;
 import org.example.algorithms.DeterministicSelect;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Arrays;
 import java.util.Random;
-
 
 public class DeterministicSelectTest {
     private final Random rnd = new Random(2024);

@@ -61,3 +61,12 @@ Metrics are tracked in a `Metrics` class:
 
 ### 4. Max Recursion Depth vs Input Size
 ![Max Recursion Depth vs Input Size](plots/4.png)  
+
+# Summary
+
+The experimental results match theoretical expectations.
+- **MergeSort** and **Closest Pair** run in Θ(n log n) time.
+- **QuickSort** maintains O(log n) recursion depth on random inputs.
+- **Deterministic Select** runs in linear time with logarithmic recursion depth.
+
+Minor variations in time and allocations are due to caching and memory overhead, but overall the measurements confirm correctness and efficiency of the implementations.
