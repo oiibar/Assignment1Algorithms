@@ -45,22 +45,22 @@ Metrics are tracked in a `Metrics` class:
 
 ## Plots
 ### 1. Time vs Input Size
-![Time vs Input Size](plots/1.png)  
+![Time vs Input Size](src/plots/1.png)  
 
 ---
 
 ### 2. Comparisons vs Input Size
-![Comparisons vs Input Size](plots/2.png)  
+![Comparisons vs Input Size](src/plots/2.png)  
 
 ---
 
 ### 3. Allocations vs Input Size
-![Allocations vs Input Size](plots/3.png)  
+![Allocations vs Input Size](src/plots/3.png)  
 
 ---
 
 ### 4. Max Recursion Depth vs Input Size
-![Max Recursion Depth vs Input Size](plots/4.png)  
+![Max Recursion Depth vs Input Size](src/plots/4.png)  
 
 # Summary
 
