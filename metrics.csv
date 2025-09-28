@@ -1,0 +1,13 @@
+Algorithm,ArraySize,Time(ns),Comparisons,Allocations,MaxDepth
+QuickSort,10,8799,24,0,1
+MergeSort,10,6502,29,19,1
+QuickSort,100,10791,647,0,3
+MergeSort,100,23587,658,492,4
+QuickSort,1000,102740,11022,0,6
+MergeSort,1000,213438,10382,7936,7
+QuickSort,5000,361932,70708,0,7
+MergeSort,5000,468372,59063,54488,10
+Selection,50,23234,346,22,3
+ClosestPoints,100,493440,465,0,7
+ClosestPoints,500,1085175,4304,0,9
+ClosestPoints,2000,8946345,25390,0,11
